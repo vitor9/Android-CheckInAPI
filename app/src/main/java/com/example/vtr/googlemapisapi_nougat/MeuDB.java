@@ -49,7 +49,7 @@ public class MeuDB extends SQLiteOpenHelper{
                 });
     }
 
-    public List<Endereco> getAllClientes() {
+    public List<Endereco> getAllEnderecos() {
         List<Endereco> enderecos = new ArrayList<>();
 
         SQLiteDatabase db = getWritableDatabase();

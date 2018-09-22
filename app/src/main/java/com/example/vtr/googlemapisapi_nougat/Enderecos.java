@@ -12,28 +12,36 @@ import java.util.List;
 
 public class Enderecos extends AppCompatActivity {
 
-    List<String> lstEnderecos = new ArrayList<>();
-    ListView listView;
+    private ListView lstEnderecos;
+    private List<Endereco> enderecos;
+    private MeuDB db;
+
     String[] listItems = {"Endereco 1", "Endereco 2 ", "Endereco 3", "Endereco 4" };
     ArrayAdapter<String> adapter;
-    ArrayList<String> listEnderecos = new ArrayList<String>();
+//    ArrayList<String> listEnderecos = new ArrayList<String>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_enderecos);
 
-
+        db = new MeuDB(this);
         // Lista
-        listView = (ListView) findViewById(R.id.lstEnderecos);
-        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, listItems);
-        listView.setAdapter(adapter);
+        lstEnderecos = findViewById(R.id.lstEnderecos);
+        enderecos = db.getAllEnderecos();
+
+        EnderecosAdapter adapter = new EnderecosAdapter(this, enderecos);
+//        listView = (ListView) findViewById(R.id.lstEnderecos);
+//        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, listItems);
+
+        lstEnderecos.setAdapter(adapter);
+//        lstEnderecos.setOnClickListener();
     }
 
-    public void adicionarEndereco(String endereco) {
-        listEnderecos.add(endereco);
-        adapter.notifyDataSetChanged();
-    }
+//    public void adicionarEndereco(String endereco) {
+//        listEnderecos.add(endereco);
+//        adapter.notifyDataSetChanged();
+//    }
 
     public void voltarCheckIn(View view) {
         Intent intent = new Intent(this, CheckInAPI.class);
