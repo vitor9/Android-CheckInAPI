@@ -46,12 +46,15 @@ public class CheckInAPI extends AppCompatActivity implements
         GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener {
 
+    private MeuDB db;
+
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1;
     private static float ZOOM_LEVEL = 17.0f;
     private boolean mPermissionDenied = false;
     private GoogleMap mMap;
     protected GoogleApiClient mGoogleApiClient;
     TextView txtEndereco;
+
     Geocoder geocoder;
     double lat, lon = 0;
     Location location;
@@ -66,7 +69,7 @@ public class CheckInAPI extends AppCompatActivity implements
                 (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
         txtEndereco = findViewById(R.id.txtEndereco);
-
+        db = new MeuDB(this);
     }
 
     private void buildGoogleApiClient() {
@@ -164,9 +167,21 @@ public class CheckInAPI extends AppCompatActivity implements
     }
 
     public void fazerCheckIn(View view) {
+        Endereco endereco = new Endereco();
         this.location = mMap.getMyLocation();
         onMyLocationClick(this.location);
-        String endereco = txtEndereco.toString();
+        salvar();
+    }
+
+    public void salvar() {
+        String descricao = txtEndereco.getText().toString();
+
+        Endereco endereco = new Endereco();
+        endereco.setDescricao(descricao);
+
+        db.insertEndereco(endereco);
+
+        Toast.makeText(this, "Endereco salvo com sucesso", Toast.LENGTH_SHORT).show();
     }
 
     // Este metodo recebe por parametro as coordenadas ao clicar no botao de localizacao
