@@ -38,7 +38,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-public class LocalizacaoAtual extends AppCompatActivity implements
+public class CheckInAPI extends AppCompatActivity implements
         GoogleMap.OnMyLocationButtonClickListener,
         GoogleMap.OnMyLocationClickListener,
         OnMapReadyCallback,
@@ -54,8 +54,6 @@ public class LocalizacaoAtual extends AppCompatActivity implements
     TextView txtEndereco;
     Geocoder geocoder;
     double lat, lon = 0;
-    List<String> listaCheckIn = new ArrayList<>();
-    Intent intent;
     Location location;
     private Enderecos enderecos;
 

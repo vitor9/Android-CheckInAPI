@@ -36,7 +36,7 @@ public class Enderecos extends AppCompatActivity {
     }
 
     public void voltarCheckIn(View view) {
-        Intent intent = new Intent(this, LocalizacaoAtual.class);
+        Intent intent = new Intent(this, CheckInAPI.class);
         startActivity(intent);
     }
 }
