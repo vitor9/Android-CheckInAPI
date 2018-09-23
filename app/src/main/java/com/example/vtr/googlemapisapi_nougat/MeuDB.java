@@ -79,4 +79,21 @@ public class MeuDB extends SQLiteOpenHelper{
         return enderecos;
     }
 
+    public String findLastEnderecoDescription() {
+        SQLiteDatabase db = getWritableDatabase();
+        String id = "1";
+        Cursor cursor = null;
+        String descricao = "Ainda não foi feito Check-In";
+        try {
+            cursor = db.rawQuery("SELECT descricao FROM " + TB_ENDERECO + " WHERE id=?", new String[] {id + ""});
+            if(cursor.getCount() > 0) {
+                cursor.moveToFirst();
+                descricao = cursor.getString(cursor.getColumnIndex("descricao"));
+            }
+            return descricao;
+        }finally {
+            cursor.close();
+        }
+    }
+
 }

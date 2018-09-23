@@ -70,6 +70,7 @@ public class CheckInAPI extends AppCompatActivity implements
         mapFragment.getMapAsync(this);
         txtEndereco = findViewById(R.id.txtEndereco);
         db = new MeuDB(this);
+        txtEndereco.setText(db.findLastEnderecoDescription());
     }
 
     private void buildGoogleApiClient() {
