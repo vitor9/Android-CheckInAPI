@@ -42,7 +42,7 @@ public class MeuDB extends SQLiteOpenHelper{
         // Dado usado para transferir valores no Android
         ContentValues cv = new ContentValues();
         cv.put("descricao", endereco.getDescricao());
-        cv.put("data", getDateTime());
+        cv.put("data", endereco.getDateTime());
         db.insert(TB_ENDERECO, null, cv);
     }
 
@@ -79,10 +79,4 @@ public class MeuDB extends SQLiteOpenHelper{
         return enderecos;
     }
 
-    private String getDateTime() {
-        SimpleDateFormat dateFormat = new SimpleDateFormat(
-                "dd-MM-yyyy HH:mm:ss", Locale.getDefault());
-        Date date = new Date();
-        return dateFormat.format(date);
-    }
 }
