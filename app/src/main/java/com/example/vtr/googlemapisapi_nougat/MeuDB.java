@@ -6,8 +6,11 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class MeuDB extends SQLiteOpenHelper{
 
@@ -23,7 +26,8 @@ public class MeuDB extends SQLiteOpenHelper{
     public void onCreate(SQLiteDatabase db) {
         String sql = "CREATE TABLE " + TB_ENDERECO + "(" +
                 "`id`INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT," +
-                "`descricao`TEXT NOT NULL" +
+                "`descricao`TEXT NOT NULL," +
+                "`data`TEXT NOT NULL" +
                 ")";
         db.execSQL(sql);
     }
@@ -38,6 +42,7 @@ public class MeuDB extends SQLiteOpenHelper{
         // Dado usado para transferir valores no Android
         ContentValues cv = new ContentValues();
         cv.put("descricao", endereco.getDescricao());
+        cv.put("data", getDateTime());
         db.insert(TB_ENDERECO, null, cv);
     }
 
@@ -61,7 +66,7 @@ public class MeuDB extends SQLiteOpenHelper{
                 null,
                 null,
                 null,
-                null
+                "data DESC"
         );
 
         while(cursor.moveToNext()){
@@ -72,5 +77,12 @@ public class MeuDB extends SQLiteOpenHelper{
             enderecos.add(endereco);
         }
         return enderecos;
+    }
+
+    private String getDateTime() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat(
+                "dd-MM-yyyy HH:mm:ss", Locale.getDefault());
+        Date date = new Date();
+        return dateFormat.format(date);
     }
 }
