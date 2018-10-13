@@ -1,6 +1,6 @@
-## API CHECK-IN
+# API CHECK-IN
 
-# Uma API de registro de locais simples que ficam persistidos no dispositivo
+## Uma API de registro de locais simples que ficam persistidos no dispositivo
 
 Esta API serviu como uma funcionalidade para o trabalho de TCC da minha faculdade, resolvi então compartilhar esse fragmento, tanto por para repassar conhecimento quanto porque eu realmente gostei de construir a API e quis divulgar ela aqui.
 
